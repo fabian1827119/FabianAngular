@@ -37,4 +37,23 @@ export class UserListComponent implements OnInit{
     this.router.navigate(['create-user', userId]);
   }
 
+  deletedUser(userId: number){
+    if(userId){
+
+      this.userServices.deletedUser(userId).subscribe(
+        response => {
+          debugger
+          console.log(response);
+          // this.router.navigate(['/user-list']);
+          this.getUsers();
+        },
+        (error) => {
+          debugger;
+          console.log(error);
+        }
+      );
+    }
+
+  }
+
 }

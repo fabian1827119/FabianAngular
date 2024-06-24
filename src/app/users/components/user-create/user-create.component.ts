@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { users } from '../../../interfaces/users.interfaces';
 import { UserService } from '../../services/user.service';
@@ -11,10 +11,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UserCreateComponent implements OnInit {
 
+  @ViewChild('imgRef')
+  img!: ElementRef;
+
+
+
+  userIdgobal:number = 0;
   showComponentUserlist:boolean = false;
   updEditUser:boolean = false;
   imgperfilglobalOnChange: any;
-  imgperfilglobal: any;
+  imgperfilglobalold: any;
+  imgPerfil:boolean = false;
   imgURL: any;
   form: FormGroup<{
     names: FormControl<string | null>;
@@ -70,6 +77,10 @@ export class UserCreateComponent implements OnInit {
   }
 
 
+  printImgSrc(): void {
+    console.log(this.img.nativeElement.src);
+  }
+
   submit(event: Event) {
     event.preventDefault();
 
@@ -113,6 +124,7 @@ export class UserCreateComponent implements OnInit {
       this.updEditUser = true;
 
       let userIdNumber = parseInt(userId);
+      this.userIdgobal = userIdNumber;
       this.userService.getUserId(userIdNumber).subscribe((user) => {
         console.log(user);
         let photoUserByte = user.photoUserString;
@@ -167,10 +179,12 @@ export class UserCreateComponent implements OnInit {
       alert("Las contraseñas coinciden, favor de verificarlas");
       return
     }
+    debugger;
+    this.printImgSrc();
     const formData = this.creationFormdata();
 
-    this.userService.updateUser(formData).subscribe(
-      (response) => {
+    this.userService.updateUser(formData,this.userIdgobal).subscribe(
+      response => {
         debugger;
         console.log(response);
         this.router.navigate(['/user-list']);
@@ -183,13 +197,9 @@ export class UserCreateComponent implements OnInit {
 
   }
 
-  deletedUser(){
-
-  }
-
   creationFormdata():FormData{
     const users: users = {
-      id: 0,
+      id: this.userIdgobal,
       names: this.form.value.names ?? '',
       lastName: this.form.value.lastName ?? '',
       secondLastName: this.form.value.secondLastName ?? '',
@@ -201,6 +211,7 @@ export class UserCreateComponent implements OnInit {
     };
     const formData = new FormData();
     formData.append('users', JSON.stringify(users));
+    debugger;
     // Agrega la imagen al FormData
     formData.append('photoUser', this.imgperfilglobalOnChange, this.imgperfilglobalOnChange.name);
     return formData;
@@ -210,10 +221,29 @@ export class UserCreateComponent implements OnInit {
 
 
   decodificarBase64(str: string): void {
+    debugger
     let photoUserByte = new Uint8Array(atob(str).split('').map(char => char.charCodeAt(0)));
     let blob = new Blob([photoUserByte], { type: 'image/jpeg' });
+    this.blobAFile(blob);
     let imageUrlLoad = URL.createObjectURL(blob);
     this.imgURL = imageUrlLoad;
+  }
+
+  extraerArchivoDeBlob(blob: Blob): void {
+    debugger;
+    let reader = new FileReader();
+    reader.onload = (event: any) => {
+      let contenidoDelArchivo = event.target.result;
+      console.log(contenidoDelArchivo);
+    };
+    reader.readAsDataURL(blob);
+  }
+
+  blobAFile(blob: Blob): void {
+    debugger;
+    var file = new File([blob], "imgperfilold", { type: 'image/jpeg', lastModified: Date.now() });
+    this.imgperfilglobalOnChange = file;
+    // return file;
   }
 
 

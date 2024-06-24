@@ -15,7 +15,7 @@ export class UserService {
 
   createUser(data: FormData){
     const url = 'http://localhost:8085/users/create';
-    return this.http.post<FormData>(url, data);
+    return this.http.post<users>(url, data);
   }
 
   getUserId(id: number){
@@ -23,10 +23,19 @@ export class UserService {
     return this.http.get<users>(url);
   }
 
-  updateUser(data: FormData){
-    const url = 'http://localhost:8085/users/create';
-    return this.http.put<FormData>(url, data);
+  // updateUser(data: FormData, id: number){
+  //   const url = `http://localhost:8085/users/${id}`;
+  //   return this.http.put<String>(url, data);
+  // }
+
+  updateUser(data: FormData, id: number){
+    const url = `http://localhost:8085/users/${id}`;
+    return this.http.put(url,data,{responseType: 'text'});
   }
 
+  deletedUser(id: number){
+    const url = `http://localhost:8085/users/${id}`;
+    return this.http.delete(url,{responseType: 'text'});
+  }
 
 }
