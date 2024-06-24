@@ -1,0 +1,77 @@
+
+<div class="d-flex bd-highlight">
+  <div class="p-2 flex-grow-1 bd-highlight">
+    <h1>Lista de usuarios</h1>
+  </div>
+  <div class="p-2 bd-highlight">
+    <button
+        class="btn btn-success"
+        [routerLink]="['/create-user']"
+        (click)="showComponent = true"
+        >
+          <i class="fa fa-plus"></i>
+          Crear
+        </button>
+  </div>
+  <div class="p-2 bd-highlight">
+    <button class="btn btn-primary" (click)="getUsers()">
+      <i class="fa fa-refresh"></i>
+      Actualizar
+    </button>
+  </div>
+  <hr>
+</div>
+
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre completo</th>
+      <!-- <th>Last Name</th> -->
+      <!-- <th>Second Last Name</th> -->
+      <th>Correo</th>
+      <!-- <th>Password</th> -->
+      <th>Roles</th>
+      <th>Fecha de alta</th>
+      <!-- <th>Update</th> -->
+      <!-- <th>Active</th> -->
+      <!-- <th>Photo User</th> -->
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.id}}</td>
+      <td>{{user.names}} {{user.lastName}} {{user.secondLastName}}</td>
+      <!-- <td>{{user.lastName}}</td> -->
+      <!-- <td>{{user.secondLastName}}</td> -->
+      <td>{{user.username}}</td>
+      <!-- <td>{{user.password}}</td> -->
+      <td>{{user.roles}}</td>
+      <td>{{user.creation}}</td>
+      <!-- <td>{{user.update}}</td> -->
+      <!-- <td>{{user.Active}}</td> -->
+      <!-- <td><img *ngIf="user.photoUser" [src]="user.photoUser" alt="User photo" class="user-photo"></td> -->
+      <td>
+        <button (click)="editUser(user.id)" class="btn btn-primary" >
+          <i class="fa fa-pencil-square-o"></i>
+          Editar
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger">
+          <i class="fa fa-trash-o fa-lg"></i> Borrar
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
