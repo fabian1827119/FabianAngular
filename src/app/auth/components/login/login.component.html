@@ -1,0 +1,26 @@
+
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="username">Email</label>
+    <input type="username" class="form-control" id="username" formControlName="username">
+    <div class="validaciones" *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+      El correo electrónico es requerido.
+    </div>
+    <div class="validaciones" *ngIf="loginForm.get('username')?.errors?.['email'] && loginForm.get('username')?.touched">
+      Ingrese un correo electrónico válido.
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" id="password" formControlName="password">
+    <div class="validaciones" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+      La contraseña es requerida.
+    </div>
+    <div class="validaciones" *ngIf="loginForm.get('password')?.errors?.['minlength'] && loginForm.get('password')?.touched">
+      La contraseña debe tener al menos 6 caracteres.
+    </div>
+
+
+  </div>
+  <button type="submit" class="btnResgister button-block">Login</button>

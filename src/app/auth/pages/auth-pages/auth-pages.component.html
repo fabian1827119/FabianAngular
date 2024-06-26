@@ -1,0 +1,25 @@
+
+
+<div class="contenedor-formularios">
+  <div class="contenedor-tabs">
+    <button type="button"
+    class="btnregisterlogin"
+    (click)="selectButton('login')"
+    [ngClass]="{'selected':selectedButton === 'login'}">
+      Iniciar sesión
+        </button>
+        <button type="button"
+        class="btnregisterlogin"
+        (click)="selectButton('register')"
+    [ngClass]="{'selected': selectedButton === 'register'}">
+          Registrarse
+        </button>
+  </div>
+  <div class="contenedor-formularios">
+    <app-login *ngIf="selectedbtn==true" ></app-login>
+    <app-register *ngIf="selectedbtn==false" ></app-register>
+  </div>
+
+</div>
+
+

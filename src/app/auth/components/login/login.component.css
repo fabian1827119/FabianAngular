@@ -1,0 +1,31 @@
+label{
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+div .validaciones{
+  color: red;
+  font-size: 0.8em;
+}
+
+.btnResgister {
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 2rem;
+  background: #1aae87;
+  color: #ffffff;
+  transition: all .5s ease;
+  /* -webkit-appearance: none; */
+}
+
+.button-block {
+display: block;
+width: 100%;
+}
+
+.btnResgister:hover {
+background-color: #6ebba6;
+}
