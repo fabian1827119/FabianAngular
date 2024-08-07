@@ -54,13 +54,14 @@
       <!-- <td>{{user.Active}}</td> -->
       <!-- <td><img *ngIf="user.photoUser" [src]="user.photoUser" alt="User photo" class="user-photo"></td> -->
       <td>
-        <button (click)="editUser(user.id)" class="btn btn-primary" >
+        <!-- <button (click)="editUser(user.id)" class="btn btn-primary" > -->
+        <button (click)="editUser(user.id!)" class="btn btn-primary">
           <i class="fa fa-pencil-square-o"></i>
           Editar
         </button>
       </td>
       <td>
-        <button class="btn btn-danger" (click)="deletedUser(user.id)">
+        <button class="btn btn-danger" (click)="deletedUser(user.id!)">
           <i class="fa fa-trash-o fa-lg"></i> Borrar
         </button>
       </td>

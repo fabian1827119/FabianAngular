@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DataService } from '../../../shared/data/data.service';
 
 @Component({
   selector: 'home-users-page',
@@ -7,12 +8,13 @@ import { Component, Input } from '@angular/core';
 })
 export class HomeUsersPageComponent {
   @Input()
-  showComponent: boolean;
+  showComponent: boolean=false;
   @Input()
-  showComponentUserlist: boolean;
+  showComponentUserlist: boolean=false;
 
-  constructor() {
-    this.showComponent = false; // Assign a default value to 'showComponent'
-    this.showComponentUserlist = false; // Assign a default value to 'showComponentUserlist'
+  constructor(private dataService:DataService) {
+    //this.showComponent = true; // Assign a default value to 'showComponent'
+    this.dataService.currentSuccess.subscribe(success=>this.showComponent=success);
+    this.showComponentUserlist = true; // Assign a default value to 'showComponentUserlist'
   }
 }

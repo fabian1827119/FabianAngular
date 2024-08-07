@@ -1,12 +1,12 @@
 export interface users{
-    id: number;
+    id?: number;
     names: string;
     lastName: string;
     secondLastName: string;
     username: string;
     password?: string;
     roles: string;
-    creation:string;
+    creation?:string;
     update?:string;
     Active?:boolean;
     photoUser?:string;

@@ -8,6 +8,7 @@ import { UsersModule } from './users/users.module';
 import { SharedModule } from './shared/shared.module';
 import { AuthPagesComponent } from './auth/pages/auth-pages/auth-pages.component';
 import { AuthModule } from './auth/auth.module';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { AuthModule } from './auth/auth.module';
     SharedModule,
     AuthModule
   ],
-  providers: [],
+  providers: [
+    CookieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
